@@ -39,9 +39,9 @@ precmd() {
   export DIR=`basename $PWD`
   echo -ne "\e]1;$DIR\a"
 }
-. ~/.zsh/aliases
-. ~/.zsh/iterm2.zsh
-. ~/scripts/z.sh
+. ~/.zsh_scripts/aliases
+. ~/.zsh_scripts/iterm2.zsh
+. ~/.zsh_scripts/z.sh
 # Customize to your needs...
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/heroku/bin
 
