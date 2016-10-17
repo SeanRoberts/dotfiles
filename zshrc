@@ -6,7 +6,7 @@ ZSH_CUSTOM=$HOME/.zsh_custom
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="seanroberts"
+ZSH_THEME="excid3"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -25,7 +25,7 @@ ZSH_THEME="seanroberts"
 DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -63,6 +63,11 @@ export NVM_DIR="$HOME/.nvm"
 # Syntax highlighting
 source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 . `brew --prefix`/etc/profile.d/z.sh
+
+# known_hosts completion
+local knownhosts
+knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
+zstyle ':completion:*:(ssh|scp|sftp|ping):*' hosts $knownhosts
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
