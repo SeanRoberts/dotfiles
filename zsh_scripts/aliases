@@ -23,6 +23,13 @@ alias gpam='gpom;gppm'
 alias gpo='git push origin'
 alias gpl='git push live'
 alias gpa='gpo;gpl'
+alias gfff='git-flow feature finish'
+alias gffs='git-flow feature start'
+alias gfhs='git-flow hotfix start'
+alias gfhf='git-flow hotfix finish'
+alias gfrs='git-flow release start'
+alias gfrf='git-flow release finish'
+
 # rails
 alias sc='script/console'
 alias ss='script/server'
@@ -30,7 +37,7 @@ alias sg='script/generate'
 alias a='autotest -rails'
 alias tlog='tail -f log/development.log'
 alias scaffold='script/generate nifty_scaffold'
-alias migrate='rake db:migrate db:test:clone'
+alias migrate='rails db:migrate; rails db:migrate RAILS_ENV=test'
 alias rst='touch tmp/restart.txt'
 alias dbu="bundle exec rake db:migrate; bundle exec rake db:test:prepare; notifier -title 'Migration Completed' -message 'Aww yes'"
 alias dep="bundle exec cap deploy"
@@ -44,6 +51,18 @@ alias br='echo -ne "\e]1;Rails: `basename $PWD`\a"; be rails'
 alias binit="bi && b package && echo 'vendor/ruby' >> .gitignore"
 alias gphm="git push heroku master; notifier -title 'Heroku Push' -message 'Completed Heroku Push' -w"
 
+# yarn
+alias y='yarn'
+alias yrs='yarn run start'
+alias ya='yarn add'
+
+# docker / docker compose
+alias dcms='docker-compose start'
+alias dcmstop='docker-compose stop'
+alias dcmu='docker-compose up'
+alias dcm='docker-compose'
+alias dcmr='docker-compose run --rm'
+alias da='docker attach --sig-proxy=false'
 
 # commands starting with % for pasting from web
 alias %=' '

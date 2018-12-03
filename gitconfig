@@ -10,6 +10,7 @@
   co = checkout
   df = diff
   last = log -1 HEAD
+	lgb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches
 [color]
   diff = auto
   status = auto

@@ -30,7 +30,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git rvm osx history-substring-search)
+plugins=(git rvm osx history-substring-search docker)
 alias rake='noglob rake'
 source $ZSH/oh-my-zsh.sh
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
@@ -42,6 +42,7 @@ precmd() {
 . ~/.zsh_scripts/aliases
 . ~/.zsh_scripts/iterm2.zsh
 . ~/.zsh_scripts/z.sh
+. ~/.zsh_scripts/ssh_completion.sh
 # Customize to your needs...
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/heroku/bin
 
@@ -61,7 +62,7 @@ export NVM_DIR="$HOME/.nvm"
 . "$(brew --prefix nvm)/nvm.sh"
 
 # Syntax highlighting
-source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh_custom/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 . `brew --prefix`/etc/profile.d/z.sh
 
 # known_hosts completion
@@ -69,7 +70,29 @@ local knownhosts
 knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
 zstyle ':completion:*:(ssh|scp|sftp|ping):*' hosts $knownhosts
 
+
+function t() {
+  tree -I '.git|node_modules|bower_components|.DS_Store' --dirsfirst --filelimit 15 -L ${1:-3} -aC $2
+}
+
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 export PATH=./bin:$PATH
+export PATH=/Users/seanroberts/Qt5.5.1/5.5/clang_64/bin:$PATH
+
+export PATH="$HOME/.yarn/bin:$PATH"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/seanroberts/.nvm/versions/node/v6.8.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/seanroberts/.nvm/versions/node/v6.8.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/seanroberts/.nvm/versions/node/v6.8.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/seanroberts/.nvm/versions/node/v6.8.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+if [ $commands[kubectl] ]; then
+  source <(kubectl completion zsh)
+fi

@@ -29,6 +29,11 @@ function rbenv_ps1 {
   echo $rbenv_ruby_version
 }
 
+function nvm_ps1 {
+  nvm_node_version=`nvm version | sed -e 's/ .*//'`
+  echo $nvm_node_version
+}
+
 # Uncomment if you are using RVM on Mac or Linux
 
 # function rvm_ps1 {
@@ -38,13 +43,13 @@ function rbenv_ps1 {
 
 # PROMPT=' %(?,%F{green},%F{red})%n%{$reset_color%} at %{$fg[yellow]%}%m%{$reset_color%} using %{$fg[blue]%}$($rvm_ps1)%{$reset_color%} in %{$fg_bold[green]%}$(collapse_pwd)%{$reset_color%}$(hg_prompt_info)$(git_prompt_info) $(virtualenv_info)$(prompt_char) '
 PROMPT='
-%(?,%F{green},%F{red})%n%{$reset_color%} at %{$fg[yellow]%}%m%{$reset_color%} using %{$fg[blue]%}$(rbenv_ps1)%{$reset_color%} in %{$fg_bold[green]%}$(collapse_pwd)%{$reset_color%}$(hg_prompt_info)$(git_prompt_info)
+%{$fg[green]%}mbp%{$reset_color%} [%{$fg[blue]%}$(rbenv_ps1) /️ $(nvm_ps1)%{$reset_color%}] %{$fg_bold[green]%}$(collapse_pwd)%{$reset_color%}$(hg_prompt_info)$(git_prompt_info)
 $(virtualenv_info)$(prompt_char) '
 
 RPROMPT=''
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[red]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="(%{$fg[red]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%})"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}!"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
